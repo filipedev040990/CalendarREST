@@ -1,5 +1,5 @@
-# CalendREST
-"CalendREST" é um projeto de API REST para registro de calendários e eventos, desenvolvido em Node.js.
+# CalendarREST
+"CalendarREST" é um projeto de API REST para registro de calendários e eventos, desenvolvido em Node.js.
 
 Esta é uma API RESTful desenvolvida em Node.js que permite registrar calendários e eventos. Cada calendário pode ter vários eventos associados, que são compostos por um nome, uma categoria e uma data. As categorias previstas para os eventos são NORMAL, WARNING e CRITICAL.
 
