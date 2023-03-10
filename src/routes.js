@@ -42,4 +42,11 @@ router.put('/calendars/:id', async (req,res) => {
     res.status(response.status).json(response.body);
 })
 
+//cria
+router.post('/calendars/:calendarId/events', async (req,res) => {
+    const response = await createEventoController.execute(req);
+
+    res.status(response.status).json(response.body);
+})
+
 export {router};

@@ -50,10 +50,10 @@ export class Event{
     }
 
     async update(id, newItem){
-        /*const index = await this.findIndex("id", id);
+        const index = await this.findIndex("id", id);
         events[index] = {id, name : newItem.name};
 
-        return events[index];*/
+        return events[index];
     }
 
     async get(){
