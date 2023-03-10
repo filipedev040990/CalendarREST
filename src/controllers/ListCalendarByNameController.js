@@ -1,18 +1,25 @@
 import { CalendarModel } from '../model/CalendarModel';
 
 export class ListCalendarByNameController{
-    execute(input){
+    async execute(input){
         if(!input.params)
-            return {status: 400, body: 'O campo nome é necessário para que a pesquisa seja realizada'}
+            return {status: 400, body: 'The name field is required for the search to be performed'}
         
         const {name} = input.params;
         const calendarModel = new CalendarModel();
-        const calendar = calendarModel.find('name', name);
+       
+        try{
+            const calendar = await calendarModel.find('name', name);
+          
+            if(!calendar)
+                return {status: 400, body: 'Calendar does not exist'};
 
-        if(calendar)
             return {status: 200, body: calendar};
 
-        return {status: 400, body: 'Calendário inexistente'};
+        }catch(error){
+            throw new Error(error);
+        }
+
     }
 
 }

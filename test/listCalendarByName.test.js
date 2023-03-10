@@ -11,17 +11,12 @@ describe ('List calendar controler by name', () => {
        createCalendarController = new CreateCalendarController();
     })
 
-    it('Deve retornar o calendário caso o mesmo exista', () => {
-        createCalendarController.execute({body:{name: "Teste"}});
+    it('Return the calendar', async () => {
+        await createCalendarController.execute({body:{name: "Test"}});
 
-        const response = listCalendarByNameController.execute({params:{name: "Teste"}});
+        const response = await listCalendarByNameController.execute({params:{name: "Test"}});
 
         expect(response.status).toBe(200);
-
-        //expect(response.body).toHaveProperty("id");
-
-        //expect(response.body.name).toBe("Teste");
-
     })
 }) 
 

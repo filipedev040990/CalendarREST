@@ -11,30 +11,48 @@ export class CalendarModel{
        return randomUUID(); 
     }
 
-    save(){
+    async getId(){
+        return [{id: this.id}];    
+    }
+
+    async getName(){
+        return [{id: this.name}];    
+    }
+
+    async save(){
         calendars.push({id: this.id, name: this.name});
     }
 
-    delete(index){
+    async delete(index){
         calendars.splice(index,1);
     }
 
-    find(collumn, value){
+    async find(collumn, value){
         if(collumn === "id")
             return calendars.find(calendar => calendar.id === value); 
         else
             return calendars.find(calendar => calendar.name === value); 
     }
 
-    all(){
+    async findIndex(collumn, value){
+        if(collumn === "id")
+            return calendars.findIndex(calendar => calendar.id === value); 
+        else
+            return calendars.findIndex(calendar => calendar.name === value); 
+    }
+
+    async all(){
        return calendars;
     }
 
-    update(){
+    async update(id, newItem){
+        const index = await this.findIndex("id", id);
+        calendars[index] = {id, name : newItem.name};
 
+        return calendars[index];
     }
 
-    get(){
+    async get(){
         return [{id: this.id, name: this.name}];    
     }
 }

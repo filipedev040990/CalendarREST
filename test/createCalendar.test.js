@@ -6,32 +6,32 @@ describe ('Create calendar controler', () => {
     let input;
 
     beforeEach(() => {
-        input = {body:{name: "Teste"}}
+        input = {body:{name: "Test"}}
     })
 
-    it('Deve retornar 400 se o nome não for fornecido', () => {
+    it('Return 400 if the name is not provided', async () => {
         createCalendarController = new CreateCalendarController();
         input.body.name = null;
 
-        const response = createCalendarController.execute(input);
+        const response = await createCalendarController.execute(input);
 
-        expect(response).toEqual({status:400, body:"O campo nome é obrigatório"})
+        expect(response).toEqual({status:400, body:"The name field is required"})
     })
 
-    it('Deve retornar o objeto criado', () => {
+    it('Return the created object', async () => {
         createCalendarController = new CreateCalendarController();
-        const response = createCalendarController.execute(input);
+        const response = await createCalendarController.execute(input);
 
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(201);
     })
 
-    it('Deve retornar 400 se o nome já existir', () => {
+    it('Return 400 if the name already exists', async() => {
         createCalendarController = new CreateCalendarController();
-        createCalendarController.execute(input);
+        await createCalendarController.execute(input);
         
-        const response = createCalendarController.execute(input);
+        const response = await createCalendarController.execute(input);
 
-        expect(response).toEqual({status:400, body:"O nome fornecido já existe"})
+        expect(response).toEqual({status:400, body:"The provided name already exists"})
     })
 }) 
 

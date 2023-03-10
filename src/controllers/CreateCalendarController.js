@@ -2,20 +2,22 @@ import {CalendarModel} from "../model/CalendarModel";
  
 export class CreateCalendarController {
 
-    execute(input){
-        
+    async execute(input){
         if(!input.body.name)
-            return {status: 400, body: 'O campo nome é obrigatório'}
+            return {status: 400, body: 'The name field is required'}
 
         const {name} = input.body;
         const calendar = new CalendarModel(name);
 
-        if(calendar.find('name', name))
-            return {status: 400, body: 'O nome fornecido já existe'}
-        
-        calendar.save()
+        if(await calendar.find('name', name))
+            return {status: 400, body: 'The provided name already exists'}
 
-        return {status: 200, body: calendar.get()};
-        
+        try{
+            await calendar.save()
+            return {status: 201, body: await calendar.get()};
+        }catch(error){
+            throw new Error(error);
+        }
+  
     }
 }

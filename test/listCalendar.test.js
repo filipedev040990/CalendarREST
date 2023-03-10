@@ -11,16 +11,16 @@ describe ('List calendar controler', () => {
        createCalendarController = new CreateCalendarController();
     })
 
-    it('Deve retornar uma lista de calendarios', () => {
-        createCalendarController.execute({body:{name: "Teste"}});
+    it('Return the list of calendars', async () => {
+        createCalendarController.execute({body:{name: "Test"}});
 
-        const response = listCalendarController.execute();
+        const response = await listCalendarController.execute();
 
         expect(response.status).toBe(200);
 
         expect(response.body[0]).toHaveProperty("id");
 
-        expect(response.body[0].name).toBe("Teste");
+        expect(response.body[0].name).toBe("Test");
 
     })
 }) 
